@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,68 +26,19 @@
   <script src="js/html5shiv.min.js"></script>
   <script src="js/respond.min.js"></script>
 <![endif]-->
+<!-- angulars-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="./js/modules/controller.js"></script>
+<script src="./js/modules/service.js"></script>
+<script src="./js/modules/app.js"></script>
 
+<!-- end of angulars-->
 </head>
-<body>
+<body ng-app="starter">
 <!-- Header start -->
-<div class="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2 col-sm-3 col-xs-12"> <a href="index.html" class="logo"><img src="images/voters.png" alt="" /></a>
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-10 col-sm-12 col-xs-12">
-        <div class="navbar navbar-default" role="navigation">
-          <div class="navbar-collapse collapse" id="nav-main">
-            <ul class="nav navbar-nav">
-              <li class="dropdown"><a href="index.html">Home <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="index.html">Home Static Image</a></li>
-                  <li><a href="index2.html">Home With Map</a></li>
-                  <li><a href="index3.html">Home With Slider</a></li>
-                </ul>
-              </li>
-              <li><a href="about-us.html">About us</a></li>
-              <li class="dropdown active"><a href="#.">Pages <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="about-us.html">About Us</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li class="active"><a href="register.html">Register</a></li>
-                  <li><a href="job-listing.html">Job Listing</a></li>
-                  <li><a href="job-detail.html">Job Detail</a></li>
-                  <li><a href="candidate-listing.html">Candidate Listing</a></li>
-                  <li><a href="candidate-detail.html">Candidate Detail</a></li>
-                  <li><a href="company-detail.html">Company Profile</a></li>
-                  <li><a href="edit-profile.html">Edit Profile</a></li>
-                  <li><a href="post-job.html">Post a Job</a></li>
-                  <li><a href="packages.html">Packages</a></li>
-                  <li><a href="faqs.html">FAQs</a></li>
-                  <li><a href="404.html">404 Page</a></li>
-                  <li><a href="typography.html">Typography</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="blog.html">Blog <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="blog.html">Blog List</a></li>
-                  <li><a href="blog-detail.html">Blog Detail</a></li>
-                  <li><a href="blog-grid.html">Blog Grid</a></li>
-                  <li><a href="blog-full-width.html">Blog Grid Full Width</a></li>
-                </ul>
-              </li>
-              <li><a href="contact-us.html">Contact</a></li>
-              <!-- <li class="postjob"><a href="post-job.html">Post a job</a></li> -->
-              <!-- <li class="jobseeker"><a href="candidate-listing.html">Job Seeker</a></li> -->
-            </ul>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<header ng-include="'./shared/header.html'">
+   
+</header>
 <!-- Header end --> <!-- Page Title start -->
 <!-- <div class="pageTitle">
   <div class="container">
@@ -145,104 +96,9 @@
 </div>
 
 <!--Footer-->
-<div class="footerWrap">
-  <div class="container">
-    <div class="row"> 
-      <!--About Us-->
-      <div class="col-md-3 col-sm-12">
-        <div class="ft-logo"><img src="images/voters.png" alt="Your alt text here"></div>
-        <p>VOOTE HERE .</p>
-        
-        <!-- Social Icons -->
-        <!-- Social Icons end --> 
-      </div>
-      <!--About us End--> 
-      
-      <!-- Quick Links-->
-      <!-- <div class="col-md-2 col-sm-6">
-        <h5>Quick Links</h5>
-        <!--Quick Links menu Start-->
-        <ul class="quicklinks">
-          <li><a href="#.">Career Services</a></li>
-        </ul>
-      </div>
-      <!--Quick Links menu end--> 
-      
-      <!--Jobs By Industry-->
-      <div class="col-md-3 col-sm-6">
-        <h5>Jobs By Industry</h5>
-        <!--Industry menu Start-->
-        <ul class="quicklinks">
-          <li><a href="#.">Information Technology Jobs</a></li>
-        </ul>
-        <!--Industry menu End-->
-        <div class="clear"></div>
-      <!-- </div>  -->
-      
-      <!--Latest Articles-->
-      <div class="col-md-4 col-sm-12">
-        <h5>Latest Articles</h5>
-        <ul class="posts-list">
-          Article 1
-          <!-- <li>
-            <article class="post post-list">
-              <div class="entry-content media">
-                <div class="media-left"> <a href="#." title="" class="entry-image"> <img width="80" height="80" src="images/news-1.jpg" alt="Your alt text here"> </a> </div>
-                <div class="media-body">
-                  <h4 class="entry-title"> <a href="#.">Sed fermentum at lectus nec porta.</a> </h4>
-                  <div class="entry-content-inner">
-                    <div class="entry-meta"> <span class="entry-date">Jan 28, 2016</span> </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </li> -->
-          <!--Article end 1--> 
-          
-          <!--Article 2-->
-          <!-- <li>
-            <article class="post post-list">
-              <div class="entry-content media">
-                <div class="media-left"> <a href="#." title="" class="entry-image"> <img width="80" height="80" src="images/news-2.jpg" alt="Your alt text here"> </a> </div>
-                <div class="media-body">
-                  <h4 class="entry-title"> <a href="#.">Sed fermentum at lectus nec porta.</a> </h4>
-                  <div class="entry-content-inner">
-                    <div class="entry-meta"> <span class="entry-date">Jan 28, 2016</span> </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </li> -->
-          <!--Article end 2--> 
-          
-          <!--Article 3-->
-          <!-- <li>
-            <article class="post post-list">
-              <div class="entry-content media">
-                <div class="media-left"> <a href="#." title="" class="entry-image"> <img width="80" height="80" src="images/news-3.jpg" alt="Your alt text here"> </a> </div>
-                <div class="media-body">
-                  <h4 class="entry-title"> <a href="#.">Sed fermentum at lectus nec porta.</a> </h4>
-                  <div class="entry-content-inner">
-                    <div class="entry-meta"> <span class="entry-date">Jan 28, 2016</span> </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </li> -->
-          <!--Article end 3-->
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Footer end--> 
-
-<!--Copyright-->
-<div class="copyright">
-  <div class="container">
-    <div class="bttxt">Copyright &copy; 2017 Your Company Name. All Rights Reserved. Design by: <a href="http://graphicriver.net/user/ecreativesol" target="_blank">eCreativeSolutions</a></div>
-  </div>
-</div>
+<footer ng-include="'./shared/footer.html'">
+   
+</footer>
 
 <!-- Bootstrap's JavaScript --> 
 <script src="js/jquery-2.1.4.min.js"></script> 
