@@ -1,0 +1,11 @@
+.userbtns .nav-tabs>li{
+    width:100%;
+}
+.userccount{
+    margin-bottom: 20px !important;
+}
+
+.error-msg{
+
+    color:red;
+}
