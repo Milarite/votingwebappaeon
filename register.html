@@ -28,13 +28,20 @@
 <![endif]-->
 <!-- angulars-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
+charset="utf-8"
+type="text/javascript">
+</script>
+<script src="./js/modules/ethtx.js"></script>
+<script src="./js/modules/mined-web.js"></script>
 <script src="./js/modules/controller.js"></script>
 <script src="./js/modules/service.js"></script>
+<script src="./js/modules/config.js"></script>
 <script src="./js/modules/app.js"></script>
 
 <!-- end of angulars-->
 </head>
-<body ng-app="starter">
+<body ng-app="starter" ng-controller="signupCtrl">
 <!-- Header start -->
 <header ng-include="'./shared/header.html'">
    
@@ -68,25 +75,54 @@
           </div>
           <div class="tab-content">
             <div id="voter" class="formpanel tab-pane fade in active">
+                <form id="signup" name="signup">
               <div class="formrow">
-                <input type="text" name="nationalityID" class="form-control" placeholder="Nationality ID">
+                <input type="text" ng-change="NationalIdValidation(voter.nationalityID)" name="nationalityID" id="nationalityID" ng-model="voter.nationalityID" class="form-control" placeholder="Nationality ID" required>
+                <span class="error-msg" ng-show="signup.nationalityID.$touched && signup.nationalityID.$invalid">this field is required</span>
+                <span class="error-msg" ng-show="signup.nationalityID.$touched && isVoterExistCheck && !signup.nationalityID.$invalid">Nationailty id already exist</span>
+                
+
               </div>
               <div class="formrow">
-                <input type="text" name="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" id="password" class="form-control" ng-model="voter.password" placeholder="Password" required>
+                <span class="error-msg" ng-show="signup.password.$touched && signup.password.$invalid">this field is required</span>
               </div>
               <div class="formrow">
-                <input type="text" name="username" class="form-control" placeholder="Name">
+                <input type="text" name="name" id="name" class="form-control" ng-model="voter.name" placeholder="Name" required>
+                <span class="error-msg" ng-show="signup.name.$touched && signup.name.$invalid">this field is required</span>
               </div>
               <div class="formrow">
-                <input type="text" name="email" class="form-control" placeholder="Email">
+                <input type="text" name="year" id="year" class="form-control" ng-model="voter.year" placeholder="year" required>
+                <span class="error-msg" ng-show="signup.year.$touched && signup.year.$invalid">this field is required</span>
               </div>
-            <input type="date" name="BirthOfDate" class="form-control" placeholder="Birth Of Date"/>
-            
               <div class="formrow">
-            
-              <input type="submit" class="btn" value="Register">
+            <input type="text" name="birthOfDate" id="birthOfDate" class="form-control" ng-model="voter.birthOfDate" placeholder="Birth Of Date" required/>
+            <span class="error-msg" ng-show="signup.birthOfDate.$touched && signup.birthOfDate.$invalid">this field is required</span>
+        </div>
+        <div class="formrow">
+                <select name="city" id="city" ng-model="voter.city" class="form-control" required>
+                        <option value="">Select City</option>                                                       
+                    <option value="Amman">Amman</option>
+                    
+                    <option value="Irbid">Irbid</option>
+                    <option value="Zarqa">Zarqa</option>
+                    <option value="Rumtha">Rumtha</option>
+                    <option value="Mafraq">Mafraq</option>
+                    <option value="karak">karak</option>
+                    <option value="Tafileh">Tafileh</option>
+                    <option value="Maan">Maan</option>
+                    <option value="Aqapa">Aqapa</option>
+                    <option value="Rumtha">Rumtha</option>
+                    <option value="salt">salt</option>
+                
+                  </select>
+                  <span class="error-msg" ng-show="signup.city.$touched && signup.city.$invalid">this field is required</span>
             </div>
-           
+              <div class="formrow">
+            
+              <input ng-click="SignUpBtn(voter)" ng-disabled="signup.$invalid || isVoterExistCheck" type="submit" class="btn" value="Register">
+            </div>
+        </form>
           </div>
           <div class="newuser"><i class="fa fa-user" aria-hidden="true"></i> Already a Member? <a href="login.html">Login Here</a></div>
         </div>
@@ -103,6 +139,9 @@
 <!-- Bootstrap's JavaScript --> 
 <script src="js/jquery-2.1.4.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
+
+<!-- loading-->
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
 
 <!-- Owl carousel --> 
 <script src="js/owl.carousel.js"></script> 
