@@ -1,4 +1,4 @@
-angular.module('starter', [ 'starter.controllers']).run(function($rootScope)
+angular.module('starter', [ 'starter.controllers','starter.services']).run(function($rootScope)
 {
 
 });
