@@ -9,3 +9,10 @@
 
     color:red;
 }
+img{
+
+    width:100px !important; height:100px !important ;
+}
+.checked {
+    color: orange;
+}
