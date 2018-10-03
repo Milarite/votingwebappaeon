@@ -5,9 +5,11 @@ app.controller('loginCtrl',function($scope,Web3jsObj){
   
 
     // login function
-
+    Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
+    Web3jsObj.Web3Facotry(rinkebyUrl);
+    const smartInstance = Web3jsObj.Web3SmartContract();
 $scope.loginBtn=function(_voter){
-    const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(nationalId,password);
+    const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(voter.nationalId,voter.password);
     if(IsVoterExist==true){
         localStorage.setItem("voterId",_nationalID);
       }
