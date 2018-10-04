@@ -9,7 +9,7 @@ var contractsInfo  = {
     
 	}
 	
-const no_address = "0x0000000000000000000000000000000000000000";
+const no_address = "0x0000000000000000000000000000000000000002";
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
 const mainnet ="https://mainnet.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
 var judgmentAbi =[

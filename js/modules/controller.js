@@ -2,6 +2,12 @@ var app = angular.module('starter.controllers', []);
 
 app.controller('loginCtrl',function($scope,Web3jsObj,$window){
 
+    // check if voter already loged in
+
+    const nationalId = localStorage.getItem("voterId");
+    if(nationalId){
+        $window.location.href="/index.html"
+    }
   
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
     Web3jsObj.Web3Facotry(rinkebyUrl);
@@ -10,12 +16,14 @@ app.controller('loginCtrl',function($scope,Web3jsObj,$window){
 
 $scope.loginBtn=function(_voter){
     const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(_voter.nationalId,_voter.password);
-    if(IsVoterExist){
+    if(IsVoterExist != no_address){
         localStorage.setItem("voterId",_voter.nationalId);
-        $window.location.href="#";
-        location.reload();
+        $window.location.href="/index.html";
+        
       }
-      return IsVoterExist ;
+      else{
+          alert("voter not found");
+      }
      
      
     
@@ -139,5 +147,50 @@ $scope.SignUpBtn=function(_voter){
     //// register voter
   
 }
+
+});
+
+
+app.controller("indexCtrl",function($scope,Web3jsObj)
+
+{
+
+    Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
+    Web3jsObj.Web3Facotry(rinkebyUrl);
+    const smartContract = Web3jsObj.Web3SmartContract();
+    const voter_address = localStorage.getItem("vaddress");
+$scope.fetchCandidate = function(){
+    const numberOfCandidate = smartContract.getCandidateNationalIDArrayLength.call();
+    const candidatesNo = parseInt(JSON.parse(numberOfCandidate));
+    const getCurrentVoterCity = smartContract.getVoterCity.call(voter_address);
+    var items = [];
+for(var i =0 ; i < candidatesNo ;i++)
+{
+
+  var address = smartContract.getCandidateNationalID.call(i);
+  var name = smartContract.getCandidateName.call(address);
+  if(name)
+  {
+  var city = smartContract.getCandidateCity.call(address);
+
+  
+
+  
+  var _nationalId = smartContract.getCandidateNational.call(address);
+  var Campaign = smartContract.getCandidateCampaign.call(address);
+
+  if(city == getCurrentVoterCity){
+    var candidate = {nameCandidate : name , city :city ,Campaign : Campaign ,nationalId : _nationalId };
+
+  items.push(candidate);
+  }
+  
+  }
+}
+
+$scope.candidates= items;
+}
+$scope.fetchCandidate();
+
 
 });
