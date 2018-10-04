@@ -7,7 +7,9 @@ app.controller('loginCtrl',function($scope,Web3jsObj,$window){
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartInstance = Web3jsObj.Web3SmartContract();
     // login function
-
+    Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
+    Web3jsObj.Web3Facotry(rinkebyUrl);
+    const smartInstance = Web3jsObj.Web3SmartContract();
 $scope.loginBtn=function(_voter){
     debugger;
     const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(_voter.nationalId,_voter.password);
