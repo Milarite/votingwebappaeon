@@ -1,15 +1,20 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('loginCtrl',function($scope,Web3jsObj){
+app.controller('loginCtrl',function($scope,Web3jsObj,$window){
 
   
-
+    Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
+    Web3jsObj.Web3Facotry(rinkebyUrl);
+    const smartInstance = Web3jsObj.Web3SmartContract();
     // login function
 
 $scope.loginBtn=function(_voter){
-    const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(nationalId,password);
+    debugger;
+    const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(_voter.nationalId,_voter.password);
     if(IsVoterExist==true){
         localStorage.setItem("voterId",_nationalID);
+        $window.location.href="#";
+        location.reload();
       }
       return IsVoterExist ;
      
