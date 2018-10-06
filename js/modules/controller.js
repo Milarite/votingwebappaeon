@@ -182,6 +182,15 @@ debugger;
   
   }
 }
+app.controller("HistoryCtrl",function($scope,Web3jsObj)
+{
+    Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
+    Web3jsObj.Web3Facotry(rinkebyUrl);
+    const smartContract = Web3jsObj.Web3SmartContract();
+    const voter_address = localStorage.getItem("vaddress");
+    var candidateName=smartContract.getCandidateName.call(address);
+
+}
 
 $scope.candidates= items;
 }
