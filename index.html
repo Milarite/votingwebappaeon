@@ -26,6 +26,17 @@
   <script src="js/html5shiv.min.js"></script>
   <script src="js/respond.min.js"></script>
 <![endif]-->
+<!-- moment-->
+<script src="js/jquery-2.1.4.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+
+<!-- Owl carousel --> 
+<script src="js/owl.carousel.js"></script> 
+
+<!-- Custom js --> 
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+<script src="./js/modules/moment.js"></script>
 <!-- angulars-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
@@ -63,7 +74,7 @@ type="text/javascript">
             <td>{{x.city}}
             <td>{{x.Campaign}}</td>                                    
             </td>
-            <td><span class="label label-success">Vote</span></td>
+            <td><span ng-click="grantVote(x.nationalId)" style="cursor: pointer;" class="label label-success">Vote</span></td>
         </tr>
     </tbody>
 </table>
@@ -74,13 +85,6 @@ type="text/javascript">
 
 
 <!-- Bootstrap's JavaScript --> 
-<script src="js/jquery-2.1.4.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
 
-<!-- Owl carousel --> 
-<script src="js/owl.carousel.js"></script> 
-
-<!-- Custom js --> 
-<script src="js/script.js"></script>
 </body>
 </html>
