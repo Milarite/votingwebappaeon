@@ -4,7 +4,7 @@ app.controller('loginCtrl',function($scope,Web3jsObj,$window){
 
     // check if voter already loged in
 
-    const nationalId = localStorage.getItem("voterId");
+    const nationalId = localStorage.getItem("vaddress");
     if(nationalId){
         $window.location.href="/index.html"
     }
@@ -18,6 +18,7 @@ $scope.loginBtn=function(_voter){
     const IsVoterExist=smartInstance.checkIdAndPasswordVoter.call(_voter.nationalId,_voter.password);
     if(IsVoterExist != no_address){
         localStorage.setItem("voterId",_voter.nationalId);
+        localStorage.setItem("vaddress",IsVoterExist);
         $window.location.href="/index.html";
         
       }
@@ -172,17 +173,11 @@ debugger;
   if(name)
   {
   var city = smartContract.getCandidateCity.call(address);
-
-  
-
-  
   var _nationalId = smartContract.getCandidateNational.call(address);
   var Campaign = smartContract.getCandidateCampaign.call(address);
-
   if(city == getCurrentVoterCity){
     var candidate = {nameCandidate : name , city :city ,Campaign : Campaign ,nationalId : _nationalId };
-
-  items.push(candidate);
+    items.push(candidate);
   }
   
   }
