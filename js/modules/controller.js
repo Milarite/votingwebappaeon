@@ -166,7 +166,7 @@ $scope.fetchCandidate = function(){
     var items = [];
 for(var i =0 ; i < candidatesNo ;i++)
 {
-
+debugger;
   var address = smartContract.getCandidateNationalID.call(i);
   var name = smartContract.getCandidateName.call(address);
   if(name)
