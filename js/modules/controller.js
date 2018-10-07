@@ -152,14 +152,24 @@ $scope.SignUpBtn=function(_voter){
 });
 
 
-app.controller("indexCtrl",function($scope,Web3jsObj)
+app.controller("indexCtrl",function($scope,Web3jsObj,Helper)
 
 {
-
+///// important
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartContract = Web3jsObj.Web3SmartContract();
     const voter_address = localStorage.getItem("vaddress");
+
+    /// end of important
+/// get settings 
+
+const TodayDate=smartContract.getCurrentTime.call();
+const Period=smartContract.getPeriod.call();
+const StartDate=smartContract.getStartDate.call();
+const timeStampToDate=Helper.ConvertTimeStampToDate(TodayDate);
+
+// end of get settings
 $scope.fetchCandidate = function(){
     const numberOfCandidate = smartContract.getCandidateNationalIDArrayLength.call();
     const candidatesNo = parseInt(JSON.parse(numberOfCandidate));
@@ -167,7 +177,6 @@ $scope.fetchCandidate = function(){
     var items = [];
 for(var i =0 ; i < candidatesNo ;i++)
 {
-debugger;
   var address = smartContract.getCandidateNationalID.call(i);
   var name = smartContract.getCandidateName.call(address);
   if(name)
@@ -181,7 +190,7 @@ debugger;
   }
   
   }
-  $scope.candidates= item;
+  $scope.candidates= items;
  
 }
 
@@ -189,7 +198,201 @@ debugger;
 
 }
 $scope.fetchCandidate();
+
+
+$scope.CheckDate=function(){
+    var time2 =new Date(timeStampToDate);
+    //time2.add ({hours: 2 }) ;
+   
+   
+   
+   let timeStampToTime=Helper.TimeFormat(time2);
+   
+   
+   
+   const DateFormat = Helper.ConvertTimeStampTodDateFormatV2(timeStampToDate);
+   
+   const StartDateFormat = Helper.ConvertTimeStampTodDateFormat(StartDate);
+   
+   const DateNow = new Date(DateFormat);
+   const DateStartDate = new Date(StartDateFormat);
+   let TimeINt = Helper.SplitTime(Period);
+   
+   
+    let splitedTime = Helper.SplitTimeV2(timeStampToTime);
+
+    if(TodayDate && timeStampToDate && StartDate && Period)
+    {
+    if (DateStartDate < DateNow  
+        || (Helper.ConvertTimeStampTodDateFormatV2(DateStartDate) == Helper.ConvertTimeStampTodDateFormatV2(DateNow) && (TimeINt<splitedTime) ))
+     {
+       
+        return false;
+          
+     }
+    }
+    
+    return true;
+
+}
+
+$scope.grantVote = function (_candidateNationalId){
+
+ 
+if($scope.CheckDate())
+{
+
+    /// check if voted
+
+    const isVoted = smartContract.checkIfVoted.call(voter_address,_candidateNationalId);
+
+    if(isVoted == "Done")
+    {
+
+
+    // end of check if voted
+
+    // call smart contract function by send transaction
+/// send transaction
+  const data =   smartContract.grantYourVote.getData(voter_address,_candidateNationalId);
+
+  web3.eth.getTransactionCount(voter_address,function(err,nonce){
+    $.LoadingOverlay('show');    
+    var transactionRaw =new ethereumjs.Tx({ 
+        data : data,
+        nonce : nonce,
+        gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+        to : contractsInfo.main,
+        value : 0,
+        gasLimit: 1000000
+        
+
+    });
+    const vpk = smartContract.getPrivateKey.call(voter_address);
+    transactionRaw.sign(ethereumjs.Buffer.Buffer.from(vpk.substr(2), 'hex'));
+    var rawGrantVoteTransaction = '0x' + transactionRaw.serialize().toString('hex');
+
+    web3.eth.sendRawTransaction(rawGrantVoteTransaction, function (err, grantVoteTransactionHash) {
+        console.log("errz",err);
+////save hash to voter address
+
+  (async function() {
+      
+                const minedTxReceipt = await awaitTx(web3, grantVoteTransactionHash);
+                
+            
+        const hashVoterData =   smartContract.addTxtHashVoter.getData(voter_address,grantVoteTransactionHash,_candidateNationalId);
+
+        web3.eth.getTransactionCount(public_key,function(err,nonce){
+                        
+          var transactionRawHashVoter =new ethereumjs.Tx({ 
+              data : hashVoterData,
+              nonce : nonce,
+              gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+              to : contractsInfo.main,
+              value : 0,
+              gasLimit: 1000000
+              
+      
+          });
+          transactionRawHashVoter.sign(ethereumjs.Buffer.Buffer.from(private_key.substr(2), 'hex'));
+          var rawHashVoterTransaction = '0x' + transactionRawHashVoter.serialize().toString('hex');
+
+          web3.eth.sendRawTransaction(rawHashVoterTransaction, function (err, hashVoterTransactionHash) {
+              console.log("errs",err);
+            (async function() {
+                const minedTxReceipt = await awaitTx(web3, hashVoterTransactionHash);
+
+            const hashCandidateData =   smartContract.addTxtHashToCandidate.getData(_candidateNationalId,grantVoteTransactionHash);
+
+
+   web3.eth.getTransactionCount(public_key,function(err,nonce){
+                        
+          var transactionRawCandidateHash =new ethereumjs.Tx({ 
+              data : hashCandidateData,
+              nonce : nonce,
+              gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+              to : contractsInfo.main,
+              value : 0,
+              gasLimit: 1000000
+              
+      
+          });
+
+
+          transactionRawCandidateHash.sign(ethereumjs.Buffer.Buffer.from(private_key.substr(2), 'hex'));
+          var rawHashCandidatTransaction = '0x' + transactionRawCandidateHash.serialize().toString('hex');
+          web3.eth.sendRawTransaction(rawHashCandidatTransaction, function (err, candidateHashTransaction) {
+
+            (async function() {
+                const minedTxReceipt = await awaitTx(web3, candidateHashTransaction);
+if(!err){
+    alert("Done");
+}
+
+                
+
+
+
+ })();
+
+
+          });
+
+
+
+
+
+
+
+
+          });
+
+        })();
+
+    });
+
+    });
+
+/// end of send transaction
+
+  })();
+
+
+
+
+        
+
+
+
+    });
+
 });
+    }
+    else{
+        alert("You already voted to this candidate");
+    }
+
+}else{
+    alert("out of date");
+}
+
+    
+
+
+}
+
+
+
+  
+
+
+
+});
+
+
+
+
 app.controller("HistoryCtrl",function($scope,Web3jsObj)
 {
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
