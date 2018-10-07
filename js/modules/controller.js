@@ -181,11 +181,12 @@ debugger;
   }
   
   }
-
   $scope.candidates= item;
+ 
+}
+
 
 $scope.fetchCandidate();
-}
 }
 });
 app.controller("HistoryCtrl",function($scope,Web3jsObj)
