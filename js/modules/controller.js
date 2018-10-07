@@ -399,10 +399,10 @@ app.controller("HistoryCtrl",function($scope,Web3jsObj)
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartContract = Web3jsObj.Web3SmartContract();
     const voter_address = localStorage.getItem("vaddress");
-    var candidateName=smartContract.getCandidateName.call(address);
-    var vote=smartContract.grantYourVote.call(_voterAdess,_candidateNationalID);
-    const isVoted=smartContract.grantYourVote.call(_voterAddress,_candidateNationalId);
+    // const candidateName=smartContract.getCandidateName.call(address);
+    const myVotesLength=smartContract.getNationalIDArrayLength.call(voter_address);
     
+    alert(myVotesLength);
 
 
 

@@ -25,11 +25,36 @@
   <script src="js/html5shiv.min.js"></script>
   <script src="js/respond.min.js"></script>
 <![endif]-->
+<script src="js/jquery-2.1.4.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
 
+<!-- Owl carousel --> 
+<script src="js/owl.carousel.js"></script> 
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+<script src="./js/modules/moment.js"></script>
+<!-- angulars-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
+charset="utf-8"
+type="text/javascript">
+</script>
+<script src="./js/modules/ethtx.js"></script>
+<script src="./js/modules/mined-web.js"></script>
+<script src="./js/modules/controller.js"></script>
+<script src="./js/modules/service.js"></script>
+<script src="./js/modules/config.js"></script>
+<script src="./js/modules/app.js"></script>
+
+<!-- end of angulars-->
 </head>
-<body>
+<body ng-controller="HistoryCtrl" ng-app="starter">
 <!-- Header start -->
-<div class="main-panel" ng-controller="HistoryCtrl">
+
+<header ng-include="'./shared/header.html'">
+   
+</header>
+<div class="main-panel" >
 <div class="header">
   <div class="container">
     <div class="row">
@@ -40,17 +65,27 @@
         <div class="clearfix"></div>
       </div>
       
-<table>
-<div class="table table-striped" style="width:100%">
-  <tr>Candidate Name </tr>
-<th>
-  opertions
-</th>
- <ng-repeat=  x in candiadate>
-   {{x.address}}
-   {{x.candidateName}}
- </ng-repeat>
- </table>
+      <div class="container">
+
+          <table id="candidateTable" class="table table-dark">
+              <thead>
+                  <th>Candidate Name</th>
+                  <th>Candidate City</th>
+                  <th>Candidate Campaign</th>
+                 
+              </thead>
+              <tbody ng-repeat ="x in candidates">
+                  <tr>
+                      <td>{{x.nameCandidate}}
+                                                                  
+                      </td>
+                      <td>{{x.city}}
+                      <td>{{x.Campaign}}</td>                                    
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
 </div>
 <!-- Header end --> <!-- Page Title start -->
 <!-- <div class="pageTitle">
@@ -92,13 +127,6 @@ Page Title End  -->
            
 
 <!-- Bootstrap's JavaScript --> 
-<script src="js/jquery-2.1.4.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
 
-<!-- Owl carousel --> 
-<script src="js/owl.carousel.js"></script> 
-
-<!-- Custom js --> 
-<script src="js/script.js"></script>
 </body>
 </html>
