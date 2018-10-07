@@ -186,8 +186,9 @@ debugger;
 }
 
 
-$scope.fetchCandidate();
+
 }
+$scope.fetchCandidate();
 });
 app.controller("HistoryCtrl",function($scope,Web3jsObj)
 {
