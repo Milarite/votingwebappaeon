@@ -181,7 +181,13 @@ debugger;
   }
   
   }
+
+  $scope.candidates= item;
+
+$scope.fetchCandidate();
 }
+}
+});
 app.controller("HistoryCtrl",function($scope,Web3jsObj)
 {
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
@@ -195,12 +201,9 @@ app.controller("HistoryCtrl",function($scope,Web3jsObj)
 
 
 
-}
+});
 
 
 
 
-$scope.candidates= item;
 
-$scope.fetchCandidate();
-}
