@@ -401,14 +401,21 @@ app.controller("HistoryCtrl",function($scope,Web3jsObj)
     const voter_address = localStorage.getItem("vaddress");
    
     const myVotesLength=smartContract.getNationalIDArrayLength.call(voter_address);
+    var array=[];
     for(var i =0;i<myVotesLength;i++)
     {
-        const candidateName=smartContract.getCandidateName.call(address);
-        var candidateInfo={nameCandidate : name , city :city ,Campaign : Campaign  };
-        items.push(candidates);
+        var address = smartContract.getCandidateNationalID.call(i);
+        const name=smartContract.getCandidateName.call(address);
+        var city=smartContract.getCandidateCity.call(address);
+        const candidateAddress=smartContract.getVotedCandidatesAddress.call(voter_address,i);
+        const Campaign=smartContract.getCandidateCampaign.call(address);
+        console.log("candidate Adderess",candidateAddress);
+        var candidateInfo={name : name , city :city ,Campaign : Campaign  };
+        array.push (candidateInfo);
+      
     }
-    $scope.candidates=items;
-    
+   
+    $scope.candidates= array;
     // alert(myVotesLength);
      
 
