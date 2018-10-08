@@ -410,7 +410,7 @@ app.controller("HistoryCtrl",function($scope,Web3jsObj)
     $scope.candidates=items;
     
     // alert(myVotesLength);
-    const 
+     
 
 
 
