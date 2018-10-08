@@ -41,3 +41,7 @@ navbar-nav>li>a:hover, .navbar-nav>li:hover>a, .navbar-nav>li.active>a {
 #candidateTable{
     margin-top: 80px;
 }
+
+.l-text{
+    color :#263bd6 !important;
+}

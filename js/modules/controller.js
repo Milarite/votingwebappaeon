@@ -152,9 +152,25 @@ $scope.SignUpBtn=function(_voter){
 });
 
 
-app.controller("indexCtrl",function($scope,Web3jsObj,Helper)
+app.controller("indexCtrl",function($scope,Web3jsObj,Helper,$window)
 
 {
+
+    /// check if loged in 
+const isLogin = localStorage.getItem("voterId")
+if(!isLogin)
+{
+    $window.location.href="/login.html"
+    return ;
+}
+
+$scope.Logout= function(){
+    
+    localStorage.removeItem("voterId");
+    localStorage.removeItem("vaddress");
+    $window.location.href="/login.html";
+}
+    // end of check if loged in 
 ///// important
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
     Web3jsObj.Web3Facotry(rinkebyUrl);
@@ -395,8 +411,23 @@ $.LoadingOverlay('hide');
 
 
 
-app.controller("HistoryCtrl",function($scope,Web3jsObj)
+app.controller("HistoryCtrl",function($scope,Web3jsObj,$window)
 {
+
+    // check if loged in
+    const isLogin = localStorage.getItem("voterId")
+if(!isLogin)
+{
+    $window.location.href="/login.html"
+    return ;
+}
+
+$scope.Logout= function(){
+    localStorage.removeItem("voterId");
+    localStorage.removeItem("vaddress");
+    $window.location.href="/login.html";
+}
+    // end of check if loged in 
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartContract = Web3jsObj.Web3SmartContract();
