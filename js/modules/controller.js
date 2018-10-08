@@ -399,10 +399,18 @@ app.controller("HistoryCtrl",function($scope,Web3jsObj)
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartContract = Web3jsObj.Web3SmartContract();
     const voter_address = localStorage.getItem("vaddress");
-    // const candidateName=smartContract.getCandidateName.call(address);
+   
     const myVotesLength=smartContract.getNationalIDArrayLength.call(voter_address);
+    for(var i =0;i<myVotesLength;i++)
+    {
+        const candidateName=smartContract.getCandidateName.call(address);
+        var candidateInfo={nameCandidate : name , city :city ,Campaign : Campaign  };
+        items.push(candidates);
+    }
+    $scope.candidates=items;
     
-    alert(myVotesLength);
+    // alert(myVotesLength);
+    const 
 
 
 
