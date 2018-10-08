@@ -80,6 +80,7 @@ type="text/javascript">
             </div>
             <div class="formrow">
               <input type="text" class="form-control"  id="password" name="password" ng-model="voter.password" placeholder="Password" required>
+              <p ng-show="loginForm.password.$dirty && loginForm.password.$error.required">*password is required </p>
               <br/>
               <span class="error-msg" ng-show="login.password.$touched && login.password.$invalid">this field is required</span>
             </div>
