@@ -242,6 +242,8 @@ $scope.grantVote = function (_candidateNationalId){
 if($scope.CheckDate())
 {
 
+
+
     /// check if voted
 
     const isVoted = smartContract.checkIfVoted.call(voter_address,_candidateNationalId);
@@ -330,7 +332,7 @@ if(!err){
     alert("Done");
 }
 
-                
+$.LoadingOverlay('hide');        
 
 
 
