@@ -35,6 +35,7 @@ $scope.loginBtn=function(_voter){
 });
 
 app.controller("signupCtrl",function($scope,Web3jsObj){
+
     Web3jsObj.web3Init(contractsInfo.main,MainAbi,public_key,private_key);
     Web3jsObj.Web3Facotry(rinkebyUrl);
     const smartContract = Web3jsObj.Web3SmartContract();
@@ -94,7 +95,7 @@ else{
 // end Of Add Ether
 
 $scope.SignUpBtn=function(_voter){
-    
+    console.log(_voter.birthOfDate);
     $.LoadingOverlay('show');
     /// create wallet for voter
     Web3jsObj.createBrainWallet(_voter.nationalityID, _voter.password).then(function(_wallet){

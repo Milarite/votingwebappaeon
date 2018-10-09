@@ -20,12 +20,25 @@
 <!-- Custom Style -->
 <link href="css/main.css" rel="stylesheet">
 <link href="./css/custom.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/angular-datepicker.css"/>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="js/html5shiv.min.js"></script>
   <script src="js/respond.min.js"></script>
 <![endif]-->
+<script>
+$( function() {
+ // $( "#datepicker" ).datepicker();
+} );
+</script>
 <!-- angulars-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
@@ -36,6 +49,7 @@ type="text/javascript">
 <script src="./js/modules/mined-web.js"></script>
 <script src="./js/modules/controller.js"></script>
 <script src="./js/modules/service.js"></script>
+<script src="./js/modules/angular-datepicker.js"></script>
 <script src="./js/modules/config.js"></script>
 <script src="./js/modules/app.js"></script>
 
@@ -96,8 +110,9 @@ type="text/javascript">
                 <span class="error-msg" ng-show="signup.year.$touched && signup.year.$invalid">this field is required</span>
               </div>
               <div class="formrow">
-            <input type="text" name="birthOfDate" id="birthOfDate" class="form-control" ng-model="voter.birthOfDate" placeholder="Birth Of Date" required/>
-            <span class="error-msg" ng-show="signup.birthOfDate.$touched && signup.birthOfDate.$invalid">this field is required</span>
+                  <datepicker date-format="dd/MM/yyyy"> <input type="text" name="birthOfdate" id="datepicker" class="form-control" ng-model="voter.birthOfDate" placeholder="Birth Of Date" required/>
+           </datepicker>
+                    <span class="error-msg" ng-show="signup.birthOfDate.$touched && signup.birthOfDate.$invalid">this field is required</span>
         </div>
         <div class="formrow">
                 <select name="city" id="city" ng-model="voter.city" class="form-control" required>

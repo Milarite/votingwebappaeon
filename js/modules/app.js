@@ -1,4 +1,4 @@
-angular.module('starter', [ 'starter.controllers','starter.services']).run(function($rootScope)
+angular.module('starter', [ 'starter.controllers','starter.services','720kb.datepicker']).run(function($rootScope)
 {
    const isLogin =  localStorage.getItem("voterId")
         // end of check if loged in )

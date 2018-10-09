@@ -45,7 +45,17 @@ type="text/javascript">
 <script src="./js/modules/service.js"></script>
 <script src="./js/modules/config.js"></script>
 <script src="./js/modules/app.js"></script>
-
+ <script>
+                                                  $(function() {
+                                                   $( ".timepicker" ).timepicker();
+                                                  })
+                                               </script>
+                                              <script>
+                                                  $( function() {
+                                                    $( "#datepicker" ).datepicker();
+                                                  } );
+                                                  </script> -->
+                                              <!-- end of app module
 <!-- end of angulars-->
 </head>
 <body ng-controller="HistoryCtrl" ng-app="starter">
